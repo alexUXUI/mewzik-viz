@@ -1,0 +1,91 @@
+#content {
+  width: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+#content audio {
+  height: 20px;
+}
+
+#content .custom-file-upload,
+.custom-file-upload-2 {
+  display: inline-block;
+  cursor: pointer;
+  width: fit-content;
+  background: #eaeaea;
+  color: black;
+  transition: all 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 25px;
+  margin: 0 10px 0 10px;
+  font-size: 12px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+#content .custom-file-upload:hover {
+  background: rgb(9, 196, 109);
+  color: black;
+  cursor: pointer;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.audioVisualizer {
+  background: black;
+}
+
+.nav-link {
+  background: white;
+  margin: 0 0px 0 10px;
+  padding: 0 10px 0 10px;
+  border-radius: 25px;
+}
+
+.cta {
+  color: white;
+  position: absolute;
+  top: calc(50% - 200px);
+  left: calc(50% - 200px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#content .custom-file-upload-2 {
+  margin: auto;
+  display: inline-block;
+  cursor: pointer;
+  width: fit-content;
+  background: #eaeaea;
+  color: black;
+  transition: all 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  padding-left: 50px;
+  padding-right: 50px;
+  border-radius: 25px;
+  margin: 0 10px 0 10px;
+  font-size: 32px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+#content .custom-file-upload-2:hover {
+  background: rgb(9, 196, 109);
+  color: black;
+  cursor: pointer;
+}
