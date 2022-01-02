@@ -27,22 +27,22 @@
   border: none;
 }
 
-h1 {
+#welcome h1 {
   font-size: 60px;
 }
 
-h2 {
+#welcome h2 {
   font-size: 50px;
 }
 
-h3 {
+#welcome h3 {
   font-size: 40px;
 }
 
 #welcome h1,
-h2,
-h3,
-p {
+#welcome h2,
+#welcome h3,
+#welcome p {
   margin: auto;
   text-align: center;
   color: #222222;

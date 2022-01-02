@@ -10,7 +10,7 @@
   height: 20px;
 }
 
-#content .custom-file-upload,
+.custom-file-upload,
 .custom-file-upload-2 {
   display: inline-block;
   cursor: pointer;
@@ -31,13 +31,13 @@
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
-#content .custom-file-upload:hover {
+.custom-file-upload:hover {
   background: rgb(9, 196, 109);
   color: black;
   cursor: pointer;
 }
 
-input[type="file"] {
+#content input[type="file"] {
   display: none;
 }
 
@@ -63,7 +63,7 @@ input[type="file"] {
   justify-content: center;
 }
 
-#content .custom-file-upload-2 {
+.custom-file-upload-2 {
   margin: auto;
   display: inline-block;
   cursor: pointer;
