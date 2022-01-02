@@ -32,6 +32,8 @@ import { GlitchPass } from "three/examples/jsm/postprocessing/GlitchPass.js";
 // Dat GUI
 import { gui } from "./scene/dat.gui.js";
 
+import { pointsMesh, animateParticles } from "./scene/particles.js";
+
 // Renderer
 export let renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
@@ -65,32 +67,6 @@ export const runViz = () => {
 
   scene.background = new THREE.Color(sceneConfig.background);
 
-  // Make Particle System
-  const particlesGeometry = new THREE.BufferGeometry();
-  const particlesCount = 5000;
-
-  // x, y, z for all particles
-  const positionArray = new Float32Array(particlesCount * 3);
-
-  for (let i = 0; i < particlesCount * 3; i++) {
-    positionArray[i] = Math.random();
-  }
-
-  // console.log(positionArray);
-
-  particlesGeometry.setAttribute(
-    "position",
-    new THREE.BufferAttribute(positionArray, 3)
-  );
-
-  const pointsMaterial = new THREE.PointsMaterial({
-    size: 0.1,
-  });
-
-  const pointsMesh = new THREE.Points(particlesGeometry, pointsMaterial);
-
-  scene.add(pointsMesh);
-
   const controls = new OrbitControls(camera, renderer.domElement);
 
   // Adds lights to scene
@@ -100,7 +76,8 @@ export const runViz = () => {
   // Adds components to scene
   scene.add(icosahedron);
 
-  console.log(file);
+  // Add particle system to scene
+  scene.add(pointsMesh);
 
   file.onchange = function () {
     var files = this.files;
@@ -119,7 +96,9 @@ export const runViz = () => {
         // Create Audio Data
         const avgFrequencyData = analyser.getAverageFrequency();
         const frequencyData = analyser.getFrequencyData();
+        const note = analyser.getNote();
 
+        console.log(note);
         // Process Audio Data
         const { lowerHalfArray, upperHalfArray, lowerAvg, upperAvg } =
           prepareIcosahedron(frequencyData);
@@ -130,6 +109,9 @@ export const runViz = () => {
 
         // Animates the icosahedron
         animateIcosahedron(avgFrequencyData, frequencyData);
+
+        // Anitmates particles
+        animateParticles(avgFrequencyData, frequencyData);
 
         // Rotates the camera around the scene
         rotateCameraAroundScene(scene.position, camera);
@@ -186,4 +168,26 @@ config.addColor(sceneConfig, "background").onChange(function (value) {
   const hexWithHash = "#" + hex;
   // set background color
   audioVisualizer.style.backgroundColor = hexWithHash;
+});
+
+const resizeUpdateInterval = 500;
+
+function setCanvasDimensions(canvas, width, height, set2dTransform = false) {
+  const ratio = window.devicePixelRatio;
+  canvas.width = width * ratio;
+  canvas.height = height * ratio;
+  canvas.style.width = `${width}px`;
+  canvas.style.height = `${height}px`;
+  if (set2dTransform) {
+    canvas.getContext("2d").setTransform(ratio, 0, 0, ratio, 0, 0);
+  }
+}
+
+window.addEventListener("resize", () => {
+  const width = window.innerWidth;
+  const height = window.innerHeight;
+  camera.aspect = width / height;
+  camera.updateProjectionMatrix();
+  renderer.setSize(width, height);
+  setCanvasDimensions(renderer.domElement, width, height);
 });

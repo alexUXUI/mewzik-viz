@@ -1,5 +1,6 @@
 import * as THREE from "three";
 import { gui } from "./dat.gui.js";
+import { AudioAnalyser } from "./audio-analyser.js";
 
 const audioConfig = {
   fftSize: 2048,
@@ -69,7 +70,9 @@ export class AudioManager {
         });
       }
 
-      const analyser = new THREE.AudioAnalyser(this.audio, this.fftSize);
+      const analyser = new AudioAnalyser(this.audio, this.fftSize);
+
+      this.analyser = analyser;
 
       return analyser;
     } catch (e) {

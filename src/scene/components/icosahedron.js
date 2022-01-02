@@ -10,7 +10,7 @@ const config = {
   size: 10,
   detail: 10,
   geometry: ["IcosahedronBufferGeometry", "DodecahedronBufferGeometry"],
-  selectedGeometry: 0,
+  selectedGeometry: 1,
   damping: 1,
   waveCoefficient: 3,
   timeCoefficient: 300,

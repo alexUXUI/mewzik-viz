@@ -1,0 +1,11 @@
+#unsupported {
+  width: 100%;
+}
+
+#unsupported .container {
+  width: 80%;
+}
+
+#unsupported h1 {
+  font-size: 2.5vw;
+}
