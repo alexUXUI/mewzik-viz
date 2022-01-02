@@ -91,8 +91,6 @@ export const runViz = () => {
 
   scene.add(pointsMesh);
 
-  
-
   const controls = new OrbitControls(camera, renderer.domElement);
 
   // Adds lights to scene

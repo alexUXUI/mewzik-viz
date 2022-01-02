@@ -6,58 +6,6 @@
   align-items: center;
   font-family: "Roboto", sans-serif;
   margin-bottom: 0;
-
-}
-
-#welcome button {
-  height: 50px;
-  font-size: 40px;
-  width: 300px;
-  border: none;
-  transition: all 0.3s ease-in-out;
-}
-
-#welcome button:hover {
-  cursor: pointer;
-  background: black;
-  color: white;
-  height: 50px;
-  font-size: 35px;
-  width: 300px;
-  border: none;
-}
-
-#welcome h1 {
-  font-size: 60px;
-}
-
-#welcome h2 {
-  font-size: 50px;
-}
-
-#welcome h3 {
-  font-size: 40px;
-}
-
-#welcome h1,
-#welcome h2,
-#welcome h3,
-#welcome p {
-  margin: auto;
-  text-align: center;
-  color: #222222;
-}
-
-#welcome button {
-  margin-top: 40px;
-  font-size: 30px;
-  transition: all 0.2s ease-in-out;
-}
-
-#welcome button:hover {
-  background: rgb(9, 196, 109);
-  color: black;
-  cursor: pointer;
 }
 
 .nav-link {
@@ -80,4 +28,3 @@
   align-items: center;
   margin-top: 200px;
 }
-

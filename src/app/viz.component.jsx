@@ -31,8 +31,8 @@ export const AudioVisualizer = () => {
     <div id="screen--start">
       <div className="audioVisualizer">
         <div id="content">
-          <Link className="nav-link" href="/">
-            <a>Home</a>
+          <Link href="/">
+            <a className="nav-link">Home</a>
           </Link>
           <div className={style}>
             {!isAudioPlaying && <h1>Get some tunes</h1>}

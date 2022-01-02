@@ -3,3 +3,178 @@ html {
   margin: 0;
   padding: 0;
 }
+
+#welcome {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Roboto", sans-serif;
+  margin-bottom: 0;
+}
+
+#welcome button {
+  height: 50px;
+  font-size: 40px;
+  width: 300px;
+  border: none;
+  transition: all 0.3s ease-in-out;
+}
+
+#welcome button:hover {
+  cursor: pointer;
+  background: black;
+  color: white;
+  height: 50px;
+  font-size: 35px;
+  width: 300px;
+  border: none;
+}
+
+h1 {
+  font-size: 60px;
+}
+
+h2 {
+  font-size: 50px;
+}
+
+h3 {
+  font-size: 40px;
+}
+
+#welcome h1,
+h2,
+h3,
+p {
+  margin: auto;
+  text-align: center;
+  color: #222222;
+}
+
+#welcome button {
+  margin-top: 40px;
+  font-size: 30px;
+  transition: all 0.2s ease-in-out;
+}
+
+#welcome button:hover {
+  background: rgb(9, 196, 109);
+  color: black;
+  cursor: pointer;
+}
+
+.nav-link {
+  transition: all 0.2s ease-in-out;
+}
+
+.nav-link:hover {
+  background: rgb(9, 196, 109);
+  color: black;
+  cursor: pointer;
+}
+
+.item {
+  margin: 10px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 200px;
+}
+
+/* audio viz */
+#content {
+  width: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+#content audio {
+  height: 20px;
+}
+
+#content .custom-file-upload,
+.custom-file-upload-2 {
+  display: inline-block;
+  cursor: pointer;
+  width: fit-content;
+  background: #eaeaea;
+  color: black;
+  transition: all 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 25px;
+  margin: 0 10px 0 10px;
+  font-size: 12px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+#content .custom-file-upload:hover {
+  background: rgb(9, 196, 109);
+  color: black;
+  cursor: pointer;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.audioVisualizer {
+  background: black;
+}
+
+.nav-link {
+  background: white;
+  margin: 0 0px 0 10px;
+  padding: 0 10px 0 10px;
+  border-radius: 25px;
+}
+
+.cta {
+  color: white;
+  position: absolute;
+  top: calc(50% - 200px);
+  left: calc(50% - 200px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#content .custom-file-upload-2 {
+  margin: auto;
+  display: inline-block;
+  cursor: pointer;
+  width: fit-content;
+  background: #eaeaea;
+  color: black;
+  transition: all 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  padding-left: 50px;
+  padding-right: 50px;
+  border-radius: 25px;
+  margin: 0 10px 0 10px;
+  font-size: 32px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+#content .custom-file-upload-2:hover {
+  background: rgb(9, 196, 109);
+  color: black;
+  cursor: pointer;
+}
