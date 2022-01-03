@@ -31,16 +31,16 @@ for (let i = 0; i < particlesCount * 3; i++) {
   const iz = i * 3 + 2;
 
   // good one
-  // positionArray[i] = Math.sin((Math.random() - 0.5) * 100) * 100;
+  positionArray[i] = Math.sin((Math.random() - 0.5) * 100) * 100;
 
   // experimental
-  let val1 = Math.sin(i * (Math.PI / 180)) * 100;
-  let val2 = Math.cos(i * (Math.PI / 180)) * 100;
-  let val3 = Math.tan(i * (Math.PI / 180)) * 100;
+  // let val1 = Math.sin(i * (Math.PI / 180)) * 100;
+  // let val2 = Math.cos(i * (Math.PI / 180)) * 100;
+  // let val3 = Math.tan(i * (Math.PI / 180)) * 100;
 
-  positionArray[ix] = val1;
-  positionArray[iy] = val2;
-  positionArray[iz] = val3;
+  // positionArray[ix] = val1;
+  // positionArray[iy] = val2;
+  // positionArray[iz] = val3;
 }
 
 particlesGeometry.setAttribute(
