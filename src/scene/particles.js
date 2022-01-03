@@ -86,7 +86,6 @@ export const animateParticles = (averageFrequency, frequencyData, color) => {
   );
 
   if (particleConfig.deriveColorFromSound) {
-    console.log("enable");
     pointsMesh.material.color = new THREE.Color(color);
   }
 
