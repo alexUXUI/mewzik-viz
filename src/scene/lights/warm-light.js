@@ -20,7 +20,7 @@ const config = gui.addFolder("Warm light");
 
 config.addColor(warmLightConfig, "color").onChange(function (value) {
   warmLight.color.set(value);
-  warmLightHelper.color.set(value);
+  // warmLightHelper.color.set(value);
 });
 
 config.add(warmLight, "intensity", 0, 20);

@@ -52,7 +52,48 @@ const sceneConfig = {
   ambientLight: 0xffffff,
   background: 0x000000,
   withHelpers: false,
+  C: 0x32a852,
+  "C#": 0x32a87d,
+  D: 0x00ff00,
+  "D#": 0x32a87d,
+  E: 0x325fa8,
+  F: 0x5532a8,
+  "F#": 0x5532a8,
+  G: 0x9232a8,
+  "G#": 0xa83281,
+  A: 0xa83281,
+  "A#": 0xa83250,
+  B: 0xa84432,
+  smoothingCoefficient: 1,
 };
+
+let lastPlayedNotes = new Set();
+let playedNotes = 0;
+
+function getLastValue(set) {
+  let value;
+  for (value of set);
+  return value;
+}
+
+// for every note we recieve, make sure we get X more like it before we return the new current note
+// this is to prevent the note analzer from too much jittering
+function getCurrentNote(note, smoothingCoefficient) {
+  let currentNote = undefined;
+
+  if (playedNotes < smoothingCoefficient) {
+    lastPlayedNotes.add(note);
+    playedNotes++;
+    return currentNote;
+  } else if (playedNotes === smoothingCoefficient) {
+    currentNote = getLastValue(lastPlayedNotes);
+    playedNotes = 0;
+    lastPlayedNotes = new Set();
+    return currentNote;
+  }
+
+  return "C";
+}
 
 export const runViz = () => {
   if (!renderer) {
@@ -96,9 +137,22 @@ export const runViz = () => {
         // Create Audio Data
         const avgFrequencyData = analyser.getAverageFrequency();
         const frequencyData = analyser.getFrequencyData();
-        const note = analyser.getNote();
 
-        console.log(note);
+        // The note that is returned from the algo
+        const { note } = analyser.getNote();
+
+        // The note we want to send to the audio visualizer
+        const currentNote = getCurrentNote(
+          note,
+          sceneConfig.smoothingCoefficient
+        );
+
+        // Generate a color from the current note
+        const color = sceneConfig[currentNote];
+
+        // Set the color of the background to the current note
+        // scene.background.set(color);
+
         // Process Audio Data
         const { lowerHalfArray, upperHalfArray, lowerAvg, upperAvg } =
           prepareIcosahedron(frequencyData);
@@ -111,7 +165,12 @@ export const runViz = () => {
         animateIcosahedron(avgFrequencyData, frequencyData);
 
         // Anitmates particles
-        animateParticles(avgFrequencyData, frequencyData);
+        animateParticles(
+          avgFrequencyData,
+          frequencyData,
+          color,
+          scene.position
+        );
 
         // Rotates the camera around the scene
         rotateCameraAroundScene(scene.position, camera);
@@ -169,6 +228,26 @@ config.addColor(sceneConfig, "background").onChange(function (value) {
   // set background color
   audioVisualizer.style.backgroundColor = hexWithHash;
 });
+
+// for all the notes, add the ability to change the color of the note in dat gui
+let notes = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
+notes.forEach((note) => {
+  config.addColor(sceneConfig, note).onChange(function (value) {
+    const hex = value.toString(16);
+    const hexWithHash = "#" + hex;
+    sceneConfig[note] = hexWithHash;
+  });
+});
+
+// add the smoothin coefficient to the dat gui
+config
+  .add(sceneConfig, "smoothingCoefficient")
+  .min(1)
+  .max(100)
+  .step(0.1)
+  .onChange(function (value) {
+    sceneConfig.smoothingCoefficient = value;
+  });
 
 const resizeUpdateInterval = 500;
 

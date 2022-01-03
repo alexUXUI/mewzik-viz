@@ -52,7 +52,9 @@ class AudioAnalyser {
     var ac = autoCorrelate(this.floatData, this.audio.context.sampleRate);
 
     if (ac == -1) {
-      console.log("Error: could not compute pitch.");
+      // console.log("Error: could not compute pitch.");
+      var note = "C";
+      var detune = 0;
     } else {
       var note = noteFromPitch(ac);
       var detune = centsOffFromPitch(ac, note);
