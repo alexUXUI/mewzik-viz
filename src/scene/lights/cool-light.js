@@ -7,6 +7,7 @@ const coolLightConfig = {
   y: -3,
   z: -20,
   color: 0x3000ff,
+  intensityCoefficient: 0.1,
 };
 
 // INITIALIZE LIGHT
@@ -20,12 +21,16 @@ coolLight.position.set(x, y, z);
 // LIGHT HELPER
 export const coolLightHelper = new THREE.PointLightHelper(coolLight, 2);
 
+// Animation Function
+export const animateCoolLight = (avgFrequencyData) => {
+  coolLight.intensity = avgFrequencyData * coolLightConfig.intensityCoefficient;
+};
+
 // CONFIGURE LIGHT WITH DAT GUI
 const config = gui.addFolder("Cool Light");
 
-config.add(coolLight, "intensity", 0, 20).onChange((intensity) => {
-  coolLight.intensity = intensity;
-  coolLightHelper.update();
+config.addColor(coolLightConfig, "color").onChange(function (value) {
+  coolLight.color.set(value);
 });
 
 config.add(coolLightConfig, "x", -50, 50).onChange((x) => {
@@ -40,6 +45,9 @@ config.add(coolLightConfig, "z", -50, 50).onChange((z) => {
   coolLight.position.set(x, y, z);
 });
 
-config.addColor(coolLightConfig, "color").onChange(function (value) {
-  coolLight.color.set(value);
-});
+config
+  .add(coolLightConfig, "intensityCoefficient", 0, 10)
+  .step(0.1)
+  .onChange((value) => {
+    coolLight.intensity = coolLight.intensity * value;
+  });

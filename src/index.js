@@ -3,8 +3,17 @@ import * as THREE from "three";
 import Stats from "three/examples/jsm/libs/stats.module";
 
 // LIGHTS
-import { warmLightHelper, warmLight } from "./scene/lights/warm-light.js";
-import { coolLightHelper, coolLight } from "./scene/lights/cool-light.js";
+import {
+  warmLightHelper,
+  warmLight,
+  animateWarmLight,
+} from "./scene/lights/warm-light.js";
+
+import {
+  coolLightHelper,
+  coolLight,
+  animateCoolLight,
+} from "./scene/lights/cool-light.js";
 import { axesHelper, gridHelper } from "./scene/helpers.js";
 
 // CAMERA
@@ -158,8 +167,10 @@ export const runViz = () => {
           prepareIcosahedron(frequencyData);
 
         // adjusts the intensity of the light based on the average frequency
-        coolLight.intensity = avgFrequencyData / 30;
-        warmLight.intensity = avgFrequencyData / 30;
+
+        animateCoolLight(avgFrequencyData);
+
+        animateWarmLight(avgFrequencyData);
 
         // Animates the icosahedron
         animateIcosahedron(avgFrequencyData, frequencyData);
