@@ -7,7 +7,7 @@ import { camera } from "../camera.js";
 const config = {
   xAngleFunction: "sin",
   yAngleFunction: "cos",
-  size: 10,
+  size: 20,
   detail: 10,
   geometry: ["IcosahedronBufferGeometry", "DodecahedronBufferGeometry"],
   selectedGeometry: 1,
