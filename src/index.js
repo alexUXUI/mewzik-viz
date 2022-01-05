@@ -54,6 +54,8 @@ export const makeRenderer = () => {
   document.body.appendChild(renderer.domElement);
 };
 
+const keyboard = {};
+
 // Scene
 export const scene = new THREE.Scene();
 
@@ -183,6 +185,14 @@ export const runViz = () => {
           scene.position
         );
 
+        if (keyboard[37]) {
+          camera.rotation.y -= Math.PI * 0.01;
+        }
+
+        if (keyboard[39]) {
+          camera.rotation.y += Math.PI * 0.01;
+        }
+
         // Rotates the camera around the scene
         rotateCameraAroundScene(scene.position, camera);
 
@@ -281,3 +291,14 @@ window.addEventListener("resize", () => {
   renderer.setSize(width, height);
   setCanvasDimensions(renderer.domElement, width, height);
 });
+
+function keyDown(event) {
+  keyboard[event.keyCode] = true;
+}
+
+function keyUp(event) {
+  keyboard[event.keyCode] = false;
+}
+
+window.addEventListener("keydown", keyDown);
+window.addEventListener("keyup", keyUp);

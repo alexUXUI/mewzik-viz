@@ -5,11 +5,10 @@ const particleFolder = gui.addFolder("Particles");
 
 // Particle Configs
 const particleConfig = {
-  size: 0.1,
+  size: 2.1,
   show: true,
   sizeCoefficient: 10,
-  deriveColorFromSound: true,
-  transparent: true,
+  deriveColorFromSound: false,
 };
 
 // Make Particle System
@@ -23,16 +22,17 @@ function calculateCircumference(radius) {
   return Math.PI * (radius + radius);
 }
 
-calculateCircumference(1);
+function drawPosition() {
+  var segment = particlesCount * 2;
+  var radius = 10;
+  for (let i = 0; i < particlesCount * 3; i++) {
+    drawCircle(i, radius);
+  }
+}
 
-var segment = particlesCount * 2;
-var radius = 1000;
+drawPosition();
 
-var angle = (20 * Math.PI) / segment;
-
-var half = particlesCount / 3;
-
-for (let i = 0; i < particlesCount * 3; i++) {
+function drawStar(i) {
   const ix = i * 3;
   const iy = i * 3 + 1;
   const iz = i * 3 + 2;
@@ -40,23 +40,6 @@ for (let i = 0; i < particlesCount * 3; i++) {
   var x = radius * Math.cos(i);
   var y = radius * Math.sin(i);
   var z = 0;
-
-  // if (i < half) {
-  //   z = radius * Math.sin(i);
-  //   y = 0;
-  // }
-
-  // good one
-  // positionArray[i] = Math.sin((Math.random() - 0.5) * 100) * 100;
-
-  // experimental
-  // let val1 = Math.sin(i * (Math.PI / 180)) * 100;
-  // let val2 = Math.cos(i * (Math.PI / 180)) * 100;
-  // let val3 = Math.tan(i * (Math.PI / 180)) * 100;
-
-  // positionArray[ix] = val1;
-  // positionArray[iy] = val2;
-  // positionArray[iz] = val3;
 
   if (i % 2 === 0) {
     radius -= 1;
@@ -66,6 +49,22 @@ for (let i = 0; i < particlesCount * 3; i++) {
   positionArray[iy] = y;
   positionArray[iz] = z;
 }
+
+function drawCircle(i, radius) {
+  const ix = i * 3;
+  const iy = i * 3 + 1;
+  const iz = i * 3 + 2;
+
+  var x = radius * Math.cos(i);
+  var y = radius * Math.sin(i);
+  var z = 0;
+
+  positionArray[ix] = x;
+  positionArray[iy] = y;
+  positionArray[iz] = z;
+}
+
+calculateCircumference(1);
 
 particlesGeometry.setAttribute(
   "position",
@@ -112,14 +111,13 @@ export const animateParticles = (averageFrequency, frequencyData, color) => {
     // const xsin = Math.sin(now) * damping;
     // const ycos = Math.cos(now) * damping;
 
-    // const xsin = Math.sin(averageFrequency);
-    const xsin = averageFrequency / damping / 200;
-    const ycos = averageFrequency / damping / 200;
-    const zangle = Math.tan(now) * damping;
+    const xsin = averageFrequency / 40 + damping;
+    const ycos = averageFrequency / 40 + damping;
+
     // set new positions
     positionArray[ix] = particlePositions[ix] * (xsin + ycos);
     positionArray[iy] = particlePositions[iy] * (xsin + ycos);
-    positionArray[iz] = particlePositions[iz] * zangle;
+    // positionArray[iz] = particlePositions[iz] * (now / 3000);
 
     // positionArray[ix] = particlePositions[ix] * (x + y);
     // positionArray[iy] = particlePositions[iy] * (x + y);
@@ -131,7 +129,8 @@ export const animateParticles = (averageFrequency, frequencyData, color) => {
     new THREE.BufferAttribute(positionArray, 3)
   );
 
-  if (particleConfig.deriveColorFromSound) {
+  // if (particleConfig.deriveColorFromSound) {
+  if (false) {
     pointsMesh.material.color = new THREE.Color(color);
   }
 
