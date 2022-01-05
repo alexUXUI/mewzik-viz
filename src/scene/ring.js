@@ -63,8 +63,8 @@ function drawCircle(i, radius) {
   const iz = i * 3 + 2;
 
   var x = radius * Math.cos(i);
-  var y = radius * Math.sin(i);
-  var z = 0;
+  var y = 0 + 50;
+  var z = radius * Math.sin(i);
 
   positionArray[ix] = x;
   positionArray[iy] = y;
@@ -104,7 +104,8 @@ export const animateRing = (averageFrequency, frequencyData, color) => {
 
     const xsin = Math.sin(iy + now) + Math.sin(ix + now);
     // const xsin = averageFrequency / 40 + damping;
-    const ycos = Math.sin(iy + now) + Math.sin(ix + now) * 10;
+    const ycos =
+      Math.sin(iy + now) + Math.sin(ix + now) * (averageFrequency / 10);
     const zsin = averageFrequency / 40 + damping;
 
     // set new positions
