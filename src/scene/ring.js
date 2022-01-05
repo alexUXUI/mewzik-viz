@@ -63,8 +63,8 @@ function drawCircle(i, radius) {
   const iz = i * 3 + 2;
 
   var x = radius * Math.cos(i);
-  var y = 0 + 50;
-  var z = radius * Math.sin(i);
+  var y = 0 + 10;
+  var z = radius * Math.sin(i) + Math.sin(x);
 
   positionArray[ix] = x;
   positionArray[iy] = y;
