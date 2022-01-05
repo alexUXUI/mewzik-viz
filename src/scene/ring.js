@@ -104,7 +104,7 @@ export const animateRing = (averageFrequency, frequencyData, color) => {
 
     const xsin = Math.sin(iy + now) + Math.sin(ix + now);
     // const xsin = averageFrequency / 40 + damping;
-    const ycos = averageFrequency / 40 + damping;
+    const ycos = Math.sin(iy + now) + Math.sin(ix + now) * 10;
     const zsin = averageFrequency / 40 + damping;
 
     // set new positions
