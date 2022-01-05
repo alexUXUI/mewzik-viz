@@ -25,6 +25,8 @@ import {
   icosahedron,
   renderIcosahedron,
 } from "./scene/components/icosahedron.js";
+import { pointsMesh, animateParticles } from "./scene/particles.js";
+import { pointPlane, animatePointPlane } from "./scene/components/plane.js";
 
 // DATA TRANSFORMERS
 import { prepareIcosahedron } from "./transformer/icosahedron.js";
@@ -40,8 +42,6 @@ import { GlitchPass } from "three/examples/jsm/postprocessing/GlitchPass.js";
 
 // Dat GUI
 import { gui } from "./scene/dat.gui.js";
-
-import { pointsMesh, animateParticles } from "./scene/particles.js";
 
 // Renderer
 export let renderer = new THREE.WebGLRenderer();
@@ -127,9 +127,8 @@ export const runViz = () => {
 
   // Adds components to scene
   scene.add(icosahedron);
-
-  // Add particle system to scene
   scene.add(pointsMesh);
+  scene.add(pointPlane);
 
   file.onchange = function () {
     var files = this.files;
@@ -169,9 +168,7 @@ export const runViz = () => {
           prepareIcosahedron(frequencyData);
 
         // adjusts the intensity of the light based on the average frequency
-
         animateCoolLight(avgFrequencyData);
-
         animateWarmLight(avgFrequencyData);
 
         // Animates the icosahedron
@@ -184,6 +181,9 @@ export const runViz = () => {
           color,
           scene.position
         );
+
+        // animate point plane
+        // animatePointPlane();
 
         if (keyboard[37]) {
           camera.rotation.y -= Math.PI * 0.01;

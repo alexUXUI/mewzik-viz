@@ -5,7 +5,7 @@ const particleFolder = gui.addFolder("Particles");
 
 // Particle Configs
 const particleConfig = {
-  size: 2.1,
+  size: 0.25,
   show: true,
   sizeCoefficient: 10,
   deriveColorFromSound: false,
@@ -13,26 +13,33 @@ const particleConfig = {
 
 // Make Particle System
 const particlesGeometry = new THREE.BufferGeometry();
-const particlesCount = 600;
+const particlesCount = 300;
 
 // x, y, z for all particles
 const positionArray = new Float32Array(particlesCount * 3);
 
-function calculateCircumference(radius) {
-  return Math.PI * (radius + radius);
-}
-
+// draw the initial positions of the particles
+// we'll animate them based on this initial state
 function drawPosition() {
   var segment = particlesCount * 2;
-  var radius = 10;
+  var circleRadius = 7;
+  var starRadius = 15;
   for (let i = 0; i < particlesCount * 3; i++) {
-    drawCircle(i, radius);
+    drawCircle(i, circleRadius);
   }
 }
 
+// this will hydrate the position array
 drawPosition();
 
-function drawStar(i) {
+// take the position array and set the positions on the geometry
+particlesGeometry.setAttribute(
+  "position",
+  new THREE.BufferAttribute(positionArray, 3)
+);
+
+// helper to draw a star shape
+function drawStar(i, radius) {
   const ix = i * 3;
   const iy = i * 3 + 1;
   const iz = i * 3 + 2;
@@ -50,6 +57,7 @@ function drawStar(i) {
   positionArray[iz] = z;
 }
 
+// helper to draw a cirlce shape
 function drawCircle(i, radius) {
   const ix = i * 3;
   const iy = i * 3 + 1;
@@ -64,21 +72,12 @@ function drawCircle(i, radius) {
   positionArray[iz] = z;
 }
 
-calculateCircumference(1);
-
-particlesGeometry.setAttribute(
-  "position",
-  new THREE.BufferAttribute(positionArray, 3)
-);
-
-// var particleTexture = THREE.ImageUtils.loadTexture('./box.png');
-
 const loader = new THREE.TextureLoader();
-const shinyStar = loader.load("./shiny.png");
+// const shinyStar = loader.load("./shiny.png");
 
 const pointsMaterial = new THREE.PointsMaterial({
   size: particleConfig.size,
-  map: shinyStar,
+  // map: shinyStar,
   transparent: true,
   color: "white",
   sizeAttenuation: true,
