@@ -6,17 +6,17 @@ const originalScales = [];
 export function prepareCubes() {
   const cubes = [];
 
-  let SEPARATION = 2;
+  let SEPARATION = 5;
 
   let i = 0;
   let j = 0;
 
   for (let x = 0; x < 16; x++) {
     for (let y = 0; y < 16; y++) {
-      const geometry = new THREE.BoxGeometry(1, 1, 1);
+      const geometry = new THREE.BoxGeometry(5, 5, 5);
       const material = new THREE.MeshBasicMaterial({
         // generate a new HSL color for each cube in the color of a rainbow
-        color: new THREE.Color(`hsl(${(x / 16) * 360}, 100%, 50%)`),
+        color: new THREE.Color(`hsl(${(x / 16) * 360}, 100%, ${y * 4}%)`),
       });
       const cube = new THREE.Mesh(geometry, material);
       // position the cube in a grid, using the x & y loop variables
@@ -43,7 +43,7 @@ export function animateCubes(frequencyData) {
   for (let i = 0; i < 256; i++) {
     const cube = cubes[i];
     const originalScale = originalScales[i];
-    scaleY(cube, frequencyData[i] / 10);
+    scaleY(cube, frequencyData[i] / 30);
   }
 }
 
