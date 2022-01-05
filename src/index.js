@@ -183,7 +183,7 @@ export const runViz = () => {
         );
 
         // animate point plane
-        // animatePointPlane();
+        animatePointPlane(avgFrequencyData, frequencyData);
 
         if (keyboard[37]) {
           camera.rotation.y -= Math.PI * 0.01;

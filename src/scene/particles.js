@@ -103,24 +103,12 @@ export const animateParticles = (averageFrequency, frequencyData, color) => {
     const iy = i * 3 + 1;
     const iz = i * 3 + 2;
 
-    // var x = radius * Math.cos(angle * i);
-    // var y = radius * Math.sin(angle * i);
-
-    // calculate current vertex wave height
-    // const xsin = Math.sin(now) * damping;
-    // const ycos = Math.cos(now) * damping;
-
     const xsin = averageFrequency / 40 + damping;
     const ycos = averageFrequency / 40 + damping;
 
     // set new positions
     positionArray[ix] = particlePositions[ix] * (xsin + ycos);
     positionArray[iy] = particlePositions[iy] * (xsin + ycos);
-    // positionArray[iz] = particlePositions[iz] * (now / 3000);
-
-    // positionArray[ix] = particlePositions[ix] * (x + y);
-    // positionArray[iy] = particlePositions[iy] * (x + y);
-    // positionArray[iz] = particlePositions[iz] * (xsin + ycos);
   }
 
   particlesGeometry.setAttribute(
