@@ -29,6 +29,7 @@ import { pointsMesh, animateParticles } from "./scene/particles.js";
 import { ringMesh, animateRing } from "./scene/ring.js";
 import { pointPlane, animatePointPlane } from "./scene/components/plane.js";
 import { cubes, animateCubes } from "./scene/components/boxplane.js";
+import { prepareTree } from "./scene/tree.js";
 
 // DATA TRANSFORMERS
 import { prepareIcosahedron } from "./transformer/icosahedron.js";
@@ -57,6 +58,8 @@ export const makeRenderer = () => {
 };
 
 const keyboard = {};
+
+prepareTree();
 
 // Scene
 export const scene = new THREE.Scene();
@@ -128,15 +131,14 @@ export const runViz = () => {
   scene.add(coolLight);
 
   // Adds components to scene
-  // scene.add(icosahedron);
-  // scene.add(pointsMesh);
+  scene.add(icosahedron);
+  scene.add(pointsMesh);
   scene.add(pointPlane);
+  scene.add(ringMesh);
 
   for (let cube of cubes) {
     scene.add(cube);
   }
-
-  // scene.add(ringMesh);
 
   file.onchange = function () {
     var files = this.files;

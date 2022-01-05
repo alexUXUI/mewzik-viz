@@ -6,7 +6,7 @@ const warmLightConfig = {
   y: 3,
   z: 50,
   color: 0xff0000,
-  intensityCoefficient: 0.1,
+  intensityCoefficient: 0.05,
 };
 
 // INITIALIZE LIGHT

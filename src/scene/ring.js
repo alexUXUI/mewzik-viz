@@ -6,7 +6,7 @@ const ringFolder = gui.addFolder("Ring Points");
 // Particle Configs
 const ringConfig = {
   size: 0.1,
-  show: true,
+  show: false,
   sizeCoefficient: 10,
   deriveColorFromSound: false,
 };
@@ -129,10 +129,6 @@ export const animateRing = (averageFrequency, frequencyData, color) => {
   ringMesh.material.size = averageFrequency / 10;
   ringMesh.material.needsUpdate = true;
 };
-
-ringFolder.add(ringConfig, "size", 0, 10).onChange(() => {
-  ringMesh.material.size = ringConfig.size;
-});
 
 ringFolder.add(ringConfig, "show").onChange(() => {
   ringMesh.visible = ringConfig.show;

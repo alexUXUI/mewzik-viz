@@ -14,6 +14,7 @@ const config = {
   damping: 1,
   waveCoefficient: 3,
   timeCoefficient: 300,
+  show: true,
 };
 
 const { geometry: cGeometry, selectedGeometry, size, detail } = config;
@@ -119,3 +120,6 @@ icosahedronFolder.add(config, "xAngleFunction", angleOptions);
 icosahedronFolder.add(config, "yAngleFunction", angleOptions);
 icosahedronFolder.add(config, "damping").min(0).max(10).step(0.1);
 icosahedronFolder.add(config, "waveCoefficient").min(0).max(10).step(0.1);
+icosahedronFolder.add(config, "show").onChange((value) => {
+  icosahedron.visible = value;
+});

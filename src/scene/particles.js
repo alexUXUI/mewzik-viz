@@ -6,7 +6,7 @@ const particleFolder = gui.addFolder("Particles");
 // Particle Configs
 const particleConfig = {
   size: 0.1,
-  show: true,
+  show: false,
   sizeCoefficient: 10,
   deriveColorFromSound: false,
 };
@@ -128,10 +128,6 @@ export const animateParticles = (averageFrequency, frequencyData, color) => {
   pointsMesh.material.size = averageFrequency / 10;
   pointsMesh.material.needsUpdate = true;
 };
-
-particleFolder.add(particleConfig, "size", 0, 10).onChange(() => {
-  pointsMesh.material.size = particleConfig.size;
-});
 
 particleFolder.add(particleConfig, "show").onChange(() => {
   pointsMesh.visible = particleConfig.show;

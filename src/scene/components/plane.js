@@ -1,4 +1,12 @@
 import * as THREE from "three";
+import { gui } from "../dat.gui.js";
+
+// new gui folder
+const guiFolder = gui.addFolder("Point Plane");
+
+const config = {
+  show: true,
+};
 
 const SEPARATION = 10,
   AMOUNTX = 16,
@@ -7,11 +15,7 @@ const SEPARATION = 10,
 let particles = 0;
 let count = 0;
 
-let windowHalfX = window.innerWidth / 2;
-let windowHalfY = window.innerHeight / 2;
-
 const numParticles = AMOUNTX * AMOUNTY;
-
 const positions = new Float32Array(numParticles * 3);
 const scales = new Float32Array(numParticles);
 
@@ -61,3 +65,7 @@ export function animatePointPlane(averageFrequency, frequencyData) {
 
   pointPlane.material.needsUpdate = true;
 }
+
+guiFolder.add(config, "show").onChange(() => {
+  pointPlane.visible = config.show;
+});

@@ -1,12 +1,19 @@
 import * as THREE from "three";
 import * as TWEEN from "tween";
+import { gui } from "../dat.gui.js";
+
+// new gui folder
+const guiFolder = gui.addFolder("Rainbow Frequency");
+
+const rainbowConfig = {
+  separation: 5,
+  show: true,
+};
 
 const originalScales = [];
 
 export function prepareCubes() {
   const cubes = [];
-
-  let SEPARATION = 5;
 
   let i = 0;
   let j = 0;
@@ -21,11 +28,19 @@ export function prepareCubes() {
       const cube = new THREE.Mesh(geometry, material);
       // position the cube in a grid, using the x & y loop variables
 
-      cube.position.x = x * SEPARATION - (16 * SEPARATION) / 2; // x
-      cube.position.y = 40; // y
-      cube.position.z = y * SEPARATION - (16 * SEPARATION) / 2; // z
+      cube.position.x =
+        x * rainbowConfig.separation -
+        (16 * rainbowConfig.separation) / 2 +
+        150; // x
+      cube.position.y = 0; // y
+      cube.position.z =
+        y * rainbowConfig.separation - (16 * rainbowConfig.separation) / 2; // z
 
       originalScales.push([cube.scale.x, cube.scale.y, cube.scale.z]);
+
+      if (!rainbowConfig.show) {
+        cube.visible = false;
+      }
 
       cubes.push(cube);
 
@@ -57,3 +72,19 @@ function scaleY(mesh, scale) {
   //So we need to multiply with scale again
   mesh.position.y = (height * scale) / 2;
 }
+
+guiFolder
+  .add(rainbowConfig, "separation")
+  .min(1)
+  .max(100)
+  .step(0.1)
+  .onChange(function (value) {
+    rainbowConfig.separation = value;
+  });
+
+guiFolder.add(rainbowConfig, "show").onChange(function (value) {
+  rainbowConfig.show = value;
+  cubes.forEach((cube) => {
+    cube.visible = value;
+  });
+});
