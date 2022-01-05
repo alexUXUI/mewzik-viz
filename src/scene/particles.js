@@ -5,7 +5,7 @@ const particleFolder = gui.addFolder("Particles");
 
 // Particle Configs
 const particleConfig = {
-  size: 0.25,
+  size: 0.1,
   show: true,
   sizeCoefficient: 10,
   deriveColorFromSound: false,
@@ -64,8 +64,8 @@ function drawCircle(i, radius) {
   const iz = i * 3 + 2;
 
   var x = radius * Math.cos(i);
-  var y = radius * Math.sin(i);
-  var z = 0;
+  var y = 0;
+  var z = radius * Math.sin(i);
 
   positionArray[ix] = x;
   positionArray[iy] = y;
@@ -103,12 +103,15 @@ export const animateParticles = (averageFrequency, frequencyData, color) => {
     const iy = i * 3 + 1;
     const iz = i * 3 + 2;
 
+    // const xsin = Math.sin(iy + now) + Math.sin(ix + now);
     const xsin = averageFrequency / 40 + damping;
     const ycos = averageFrequency / 40 + damping;
+    const zsin = averageFrequency / 40 + damping;
 
     // set new positions
     positionArray[ix] = particlePositions[ix] * (xsin + ycos);
     positionArray[iy] = particlePositions[iy] * (xsin + ycos);
+    positionArray[iz] = particlePositions[iz] * (xsin + ycos);
   }
 
   particlesGeometry.setAttribute(
@@ -123,7 +126,7 @@ export const animateParticles = (averageFrequency, frequencyData, color) => {
 
   // pointsMesh.material.size = averageFrequency / particleConfig.sizeCoefficient;
   pointsMesh.visible = particleConfig.show;
-  pointsMesh.material.size = averageFrequency / 3;
+  pointsMesh.material.size = averageFrequency / 10;
   pointsMesh.material.needsUpdate = true;
 };
 
