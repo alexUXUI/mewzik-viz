@@ -26,6 +26,7 @@ import {
   renderIcosahedron,
 } from "./scene/components/icosahedron.js";
 import { pointsMesh, animateParticles } from "./scene/particles.js";
+import { ringMesh, animateRing } from "./scene/ring.js";
 import { pointPlane, animatePointPlane } from "./scene/components/plane.js";
 
 // DATA TRANSFORMERS
@@ -129,6 +130,7 @@ export const runViz = () => {
   scene.add(icosahedron);
   scene.add(pointsMesh);
   scene.add(pointPlane);
+  scene.add(ringMesh);
 
   file.onchange = function () {
     var files = this.files;
@@ -181,6 +183,9 @@ export const runViz = () => {
           color,
           scene.position
         );
+
+        // Anitmates particles
+        animateRing(avgFrequencyData, frequencyData, color, scene.position);
 
         // animate point plane
         animatePointPlane(avgFrequencyData, frequencyData);

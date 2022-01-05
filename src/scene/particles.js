@@ -22,8 +22,7 @@ const positionArray = new Float32Array(particlesCount * 3);
 // we'll animate them based on this initial state
 function drawPosition() {
   var segment = particlesCount * 2;
-  var circleRadius = 7;
-  var starRadius = 15;
+  var circleRadius = 17;
   for (let i = 0; i < particlesCount * 3; i++) {
     drawCircle(i, circleRadius);
   }
@@ -92,7 +91,7 @@ const particlePositions = JSON.parse(
 );
 
 export const animateParticles = (averageFrequency, frequencyData, color) => {
-  const now = Date.now() / 3000;
+  const now = Date.now() / 300;
 
   const damping = 4.2;
 
@@ -103,8 +102,8 @@ export const animateParticles = (averageFrequency, frequencyData, color) => {
     const iy = i * 3 + 1;
     const iz = i * 3 + 2;
 
-    // const xsin = Math.sin(iy + now) + Math.sin(ix + now);
-    const xsin = averageFrequency / 40 + damping;
+    const xsin = Math.sin(iy + now) + Math.sin(ix + now);
+    // const xsin = averageFrequency / 40 + damping;
     const ycos = averageFrequency / 40 + damping;
     const zsin = averageFrequency / 40 + damping;
 
